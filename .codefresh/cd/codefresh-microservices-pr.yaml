@@ -65,9 +65,10 @@ steps:
       - export PR_MICROSERVICE_CHART_VERSION=${{NEW_MICROSERVICE_CHART_VERSION}}-pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
       - yq e -i '.version=env(PR_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml
-      - yq e -i '.image.tag=env(NEW_CHART_VERSION)-pr-env(CF_PULL_REQUEST_NUMBER)-env(CF_SHORT_REVISION)' ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/values.yaml
+      - export IMAGE_TAG=pr-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+      - yq e -i '.image.tag=env(IMAGE_TAG)' ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/values.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/values.yaml
-      - yq e -i '(.dependencies[] | select(has("name")) | select(.name == env(MICROSERVICE))).version=env(NEW_MICROSERVICE_CHART_VERSION)-pr-env(CF_PULL_REQUEST_NUMBER)-env(CF_SHORT_REVISION)' ${{HELM_CHART_PATH}}/Chart.yaml 
+      - yq e -i '(.dependencies[] | select(has("name")) | select(.name == env(MICROSERVICE))).version=env(PR_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml 
       - export PR_CHART_VERSION=${{NEW_CHART_VERSION}}-pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
       - yq e -i '.version=env(PR_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/Chart.yaml
