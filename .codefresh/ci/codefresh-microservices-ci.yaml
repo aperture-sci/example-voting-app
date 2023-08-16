@@ -47,7 +47,11 @@ steps:
       image: quay.io/codefresh/cli
       shell: bash
       commands:
+        - cf_export VOTE_IMAGE=aperturesci.jfrog.io/demo-docker/vote:stable
+        - cf_export RESULT_IMAGE=aperturesci.jfrog.io/demo-docker/result:stable
+        - cf_export WORKER_IMAGE=aperturesci.jfrog.io/demo-docker/worker:stable
         - cf_export $(echo "${{MICROSERVICE}}" | awk '{print toupper($0)}')_IMAGE=aperturesci.jfrog.io/demo-docker/${{MICROSERVICE}}:${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+        
     stage: 'Run Integration Tests'
 
   # TODO: Add PhantomJS Example
