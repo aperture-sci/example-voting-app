@@ -149,4 +149,5 @@ steps:
         - RELEASE_NAME=pr-${{CF_PULL_REQUEST_NUMBER}}
         - NAMESPACE=eva-prs
         - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
+        - CF_REVISION=${{CF_REVISION}}
     stage: 'Test PR'
