@@ -72,6 +72,7 @@ steps:
       - export PR_CHART_VERSION=${{NEW_CHART_VERSION}}-pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
       - yq e -i '.version=env(PR_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/Chart.yaml
+      - cf_export PR_CHART_VERSION=$PR_CHART_VERSION
     stage: 'Bump Chart Version'
 
   HelmChartLint:
