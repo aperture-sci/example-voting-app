@@ -3,8 +3,8 @@ stages:
   - 'Clone Chart Repo'
   - 'Idenfity Release Candidate'
   - 'Bump Chart Version'
-  - 'Lint Chart'
   - 'Update Chart Dependencies'
+  - 'Lint Chart'
   - 'Package Chart'
   - 'Push Chart'
   - 'Promote Release Candidate'
@@ -57,14 +57,6 @@ steps:
       - cat ${{HELM_CHART_PATH}}/Chart.yaml
     stage: 'Bump Chart Version'
 
-  HelmChartLint:
-    title: Linting Helm Chart...
-    image: alpine/helm:3.9.4
-    working_directory: ${{GITClone}}/${{CF_REPO_NAME}}
-    commands:
-      - helm lint .
-    stage: 'Lint Chart'
-
   HelmChartDependencyUpdate:
     title: Pulling Helm Chart Dependencies...
     image: alpine/helm:3.9.4
@@ -72,6 +64,14 @@ steps:
     commands:
       - helm dep update 
     stage: 'Update Chart Dependencies'
+
+  HelmChartLint:
+    title: Linting Helm Chart...
+    image: alpine/helm:3.9.4
+    working_directory: ${{GITClone}}/${{CF_REPO_NAME}}
+    commands:
+      - helm lint .
+    stage: 'Lint Chart'
 
   HelmChartPackage:
     title: Packaging Helm Chart...
