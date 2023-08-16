@@ -3,8 +3,8 @@ stages:
   - 'Clone Source Code Repo'
   - 'Build Docker Images'
   - 'Bump Chart Version'
-  - 'Lint Chart'
   - 'Update Chart Dependencies'
+  - 'Lint Chart'
   - 'Package Chart'
   - 'Push Chart'
   - 'Clone Environments Repo'
@@ -75,14 +75,6 @@ steps:
       - cf_export PR_CHART_VERSION=$PR_CHART_VERSION
     stage: 'Bump Chart Version'
 
-  HelmChartLint:
-    title: Linting Helm Chart...
-    image: alpine/helm:3.9.4
-    working_directory: ${{GITCloneSource}}/${{CF_REPO_NAME}}
-    commands:
-      - helm lint .
-    stage: 'Lint Chart'
-
   HelmChartDependencyUpdate:
     title: Pulling Helm Chart Dependencies...
     image: alpine/helm:3.9.4
@@ -90,6 +82,14 @@ steps:
     commands:
       - helm dep update 
     stage: 'Update Chart Dependencies'
+
+  HelmChartLint:
+    title: Linting Helm Chart...
+    image: alpine/helm:3.9.4
+    working_directory: ${{GITCloneSource}}/${{CF_REPO_NAME}}
+    commands:
+      - helm lint .
+    stage: 'Lint Chart'
 
   HelmChartPackage:
     title: Packaging Helm Chart..
