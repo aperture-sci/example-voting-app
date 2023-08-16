@@ -1,0 +1,14 @@
+version: '1.0'
+
+stages:
+- 'Delete PR Environment'
+
+steps:
+
+  DeletePullRequestEnvironment:
+    title: Deleting Pull Request Environment
+    image: codefresh/cfstep-helm:3.9.0
+    commands:
+      - kubectl config use-context kubecon-dev
+      - helm delete -n prs pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
+    stage: 'Delete PR Environment'
