@@ -124,7 +124,7 @@ steps:
     arguments:
       action: install
       chart_name: /codefresh/volume/${{CF_REPO_NAME}}/${{CHART_NAME}}
-      release_name: pr-${{CF_PULL_REQUEST_NUMBER}}
+      release_name: eva-pr-${{CF_PULL_REQUEST_NUMBER}}
       helm_version: 3.9.0
       kube_context: kubecon-dev
       namespace: eva-prs
@@ -146,7 +146,7 @@ steps:
         - github
       VARIABLE:
         - KUBE_CONTEXT=kubecon-dev
-        - RELEASE_NAME=pr-${{CF_PULL_REQUEST_NUMBER}}
+        - RELEASE_NAME=eva-pr-${{CF_PULL_REQUEST_NUMBER}}
         - NAMESPACE=eva-prs
         - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
         - CF_REVISION=${{CF_REVISION}}
