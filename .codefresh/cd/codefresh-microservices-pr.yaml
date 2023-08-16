@@ -29,14 +29,14 @@ steps:
       DockerBuildMicroservice:
         title: Building Microservice Docker Image...
         type: build
-        working_directory: ${{GITClone}}/${{MICROSERVICE}}/
+        working_directory: ${{GITCloneSource}}/${{MICROSERVICE}}/
         image_name: ${{MICROSERVICE}}
         tag: pr-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
         registry: aperture-sci
       DockerBuildTests:
         title: Building Tests Docker Image...
         type: build
-        working_directory: ${{GITClone}}/tests/
+        working_directory: ${{GITCloneSource}}/tests/
         image_name: tests
         tag: pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
         registry: aperture-sci
@@ -45,7 +45,7 @@ steps:
   HelmChartBumpVersions:
     title: Bumping Helm Chart Versions...
     image: codefresh/cfstep-helm
-    working_directory: ${{GITClone}}
+    working_directory: ${{GITCloneSource}}
     shell: bash
     commands:
       - export CURRENT_MICROSERVICE_CHART_VERSION=`yq .version ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml`
@@ -60,7 +60,7 @@ steps:
   HelmChartWriteNewVersions:
     title: Writing Helm Chart Versions...
     image: mikefarah/yq:4.35.1
-    working_directory: ${{GITClone}}
+    working_directory: ${{GITCloneSource}}
     commands:
       - yq e -i '.version=env(NEW_MICROSERVICE_CHART_VERSION)-pr-env(CF_PULL_REQUEST_NUMBER)-env(CF_SHORT_REVISION)' ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml
@@ -74,7 +74,7 @@ steps:
   HelmChartLint:
     title: Linting Helm Chart...
     image: alpine/helm:3.9.4
-    working_directory: ${{GITClone}}/${{CF_REPO_NAME}}
+    working_directory: ${{GITCloneSource}}/${{CF_REPO_NAME}}
     commands:
       - helm lint .
     stage: 'Lint Chart'
@@ -82,7 +82,7 @@ steps:
   HelmChartDependencyUpdate:
     title: Pulling Helm Chart Dependencies...
     image: alpine/helm:3.9.4
-    working_directory: ${{GITClone}}/${{CF_REPO_NAME}}
+    working_directory: ${{GITCloneSource}}/${{CF_REPO_NAME}}
     commands:
       - helm dep update 
     stage: 'Update Chart Dependencies'
@@ -90,7 +90,7 @@ steps:
   HelmChartPackage:
     title: Packaging Helm Chart..
     image: alpine/helm:3.9.4
-    working_directory: ${{GITClone}}/${{CF_REPO_NAME}}
+    working_directory: ${{GITCloneSource}}/${{CF_REPO_NAME}}
     commands:
       - helm package .
     stage: 'Package Chart'
@@ -106,7 +106,7 @@ steps:
       credentials_in_arguments: true
     stage: 'Push Chart'
 
-  GITClone:
+  GITCloneEnvironments:
     title: Cloning Environments Repository...
     type: git-clone
     repo: 'aperture-sci/environments'
