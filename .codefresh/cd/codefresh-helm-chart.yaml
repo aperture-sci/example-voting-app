@@ -24,7 +24,7 @@ steps:
     image: alpine
     commands:
       - cf_export RELEASE_CANDIDATE_SERVICE=${{MICROSERVICE}}
-      - cf_export RELEASE_CANDIDATE_IMAGE_TAG=pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
+      - cf_export RELEASE_CANDIDATE_IMAGE_TAG=pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
     stage: 'Idenfity Release Candidate'
   
   HelmChartBumpVersions:

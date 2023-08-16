@@ -31,14 +31,14 @@ steps:
         type: build
         working_directory: ${{GITCloneSource}}/${{MICROSERVICE}}/
         image_name: ${{MICROSERVICE}}
-        tag: pr-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+        tag: pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
         registry: aperture-sci
       DockerBuildTests:
         title: Building Tests Docker Image...
         type: build
         working_directory: ${{GITCloneSource}}/tests/
         image_name: tests
-        tag: pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
+        tag: pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
         registry: aperture-sci
     stage: 'Build Docker Images'
 
@@ -65,7 +65,7 @@ steps:
       - export PR_MICROSERVICE_CHART_VERSION=${{NEW_MICROSERVICE_CHART_VERSION}}-pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
       - yq e -i '.version=env(PR_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/Chart.yaml
-      - export IMAGE_TAG=pr-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+      - export IMAGE_TAG=pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
       - yq e -i '.image.tag=env(IMAGE_TAG)' ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/values.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{MICROSERVICE}}/values.yaml
       - yq e -i '(.dependencies[] | select(has("name")) | select(.name == env(MICROSERVICE))).version=env(PR_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml 
@@ -148,6 +148,6 @@ steps:
         - KUBE_CONTEXT=kubecon-dev
         - RELEASE_NAME=eva-pr-${{CF_PULL_REQUEST_NUMBER}}
         - NAMESPACE=eva-prs
-        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
+        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
         - CF_REVISION=${{CF_REVISION}}
     stage: 'Test PR'
