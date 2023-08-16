@@ -118,37 +118,37 @@ steps:
     git: github
     stage: 'Clone Environments Repo'
   
-  DeployPR:
-    title: Deploying/Upgrading PR...
-    type: helm
-    arguments:
-      action: install
-      chart_name: demo-helm/${{CHART_NAME}}
-      chart_version : ${{PR_CHART_VERSION}}
-      release_name: pr-${{CF_PULL_REQUEST_NUMBER}}
-      helm_version: 3.9.0
-      kube_context: kubecon-dev
-      namespace: eva-prs
-      helm_repository_context: aperture-sci-artifactory
-      skip_cf_stable_helm_repo: true
-      credentials_in_arguments: true
-      custom_value_files:
-        - /codefresh/volume/environments/eva/pullrequests/values.yaml
-    stage: 'Deploy PR'
+  # DeployPR:
+  #   title: Deploying/Upgrading PR...
+  #   type: helm
+  #   arguments:
+  #     action: install
+  #     chart_name: ${{CHART_NAME}}
+  #     chart_version : ${{PR_CHART_VERSION}}
+  #     release_name: pr-${{CF_PULL_REQUEST_NUMBER}}
+  #     helm_version: 3.9.0
+  #     kube_context: kubecon-dev
+  #     namespace: eva-prs
+  #     helm_repository_context: aperture-sci-artifactory
+  #     skip_cf_stable_helm_repo: true
+  #     credentials_in_arguments: true
+  #     custom_value_files:
+  #       - /codefresh/volume/environments/eva/pullrequests/values.yaml
+  #   stage: 'Deploy PR'
 
-  RunDVTSOnPR:
-    title: Testing PR...
-    type: codefresh-run
-    arguments:
-      PIPELINE_ID: "Example Voting App/dvts"
-      TRIGGER_ID: dvts
-      BRANCH: main
-      ENABLE_NOTIFICATIONS: true
-      CONTEXT:
-        - github
-      VARIABLE:
-        - KUBE_CONTEXT=kubecon-dev
-        - RELEASE_NAME=PR-${{CF_PULL_REQUEST_NUMBER}}
-        - NAMESPACE=eva-prs
-        - TEST_IMAGE=${{CF_REPO_NAME}}/tests:pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
-    stage: 'Test PR'
+  # RunDVTSOnPR:
+  #   title: Testing PR...
+  #   type: codefresh-run
+  #   arguments:
+  #     PIPELINE_ID: "Example Voting App/dvts"
+  #     TRIGGER_ID: dvts
+  #     BRANCH: main
+  #     ENABLE_NOTIFICATIONS: true
+  #     CONTEXT:
+  #       - github
+  #     VARIABLE:
+  #       - KUBE_CONTEXT=kubecon-dev
+  #       - RELEASE_NAME=PR-${{CF_PULL_REQUEST_NUMBER}}
+  #       - NAMESPACE=eva-prs
+  #       - TEST_IMAGE=${{CF_REPO_NAME}}/tests:pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_SHORT_REVISION}}
+  #   stage: 'Test PR'
