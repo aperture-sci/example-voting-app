@@ -47,7 +47,7 @@ steps:
       image: quay.io/codefresh/cli
       shell: bash
       commands:
-        - cf_export $(echo "${{MICROSERVICE}}" | awk '{print toupper($0)}')_IMAGE=${{MICROSERVICE}}:${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+        - cf_export $(echo "${{MICROSERVICE}}" | awk '{print toupper($0)}')_IMAGE=aperturesci.jfrog.io/artifactory/demo-docker/${{MICROSERVICE}}:${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
     stage: 'Run Integration Tests'
 
   # TODO: Add PhantomJS Example
