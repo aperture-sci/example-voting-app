@@ -118,6 +118,7 @@ steps:
       CONTEXT:
         - github
       VARIABLE:
+        - RELEASE_CANDIDATE=${{NEW_CHART_VERSION}}
         - RELEASE_CANDIDATE_SERVICE=${{RELEASE_CANDIDATE_SERVICE}}
         - RELEASE_CANDIDATE_IMAGE_TAG=${{RELEASE_CANDIDATE_IMAGE_TAG}}
     stage: 'Deploy Release Candidate'
