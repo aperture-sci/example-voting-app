@@ -33,7 +33,7 @@ def browser():
 
 def test_confirm_vote_title(browser):
     browser.get("http://{}".format(vote_endpoint))
-    option_a = "Cats"
+    option_a = "Squirrels"
     option_b = "Dogs"
     assert "{} vs {}!".format(option_a, option_b) in browser.title
 
@@ -63,7 +63,7 @@ def test_vote_click(browser,):
 
 def test_confirm_result_title(browser):
     browser.get("http://{}".format(result_endpoint))
-    assert "Cats vs Dogs -- Result" in browser.title
+    assert "Squirrels vs Dogs -- Result" in browser.title
 
 
 def test_confirm_result(browser):
