@@ -102,6 +102,7 @@ steps:
       commit_message: Committed Promotion Candidate ${{RELEASE_CANDIDATE_IMAGE_TAG}} to ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/values.yaml
       git_user_name: aperture-sci
       git_user_email: aperture@codefresh.io
+      base_branch: main
       add:
         - ${{HELM_CHART_PATH}}/Chart.yaml
         - ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
