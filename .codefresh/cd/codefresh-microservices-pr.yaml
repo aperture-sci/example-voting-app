@@ -2,12 +2,12 @@ version: '1.0'
 stages:
   - 'Clone Source Code Repo'
   - 'Build Docker Images'
-  - 'Clone Environments Repo'
   - 'Bump Chart Version'
   - 'Lint Chart'
   - 'Update Chart Dependencies'
   - 'Package Chart'
   - 'Push Chart'
+  - 'Clone Environments Repo'
   - 'Deploy PR'
   - 'Test PR'
 

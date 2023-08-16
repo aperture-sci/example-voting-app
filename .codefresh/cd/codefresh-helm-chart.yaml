@@ -96,7 +96,7 @@ steps:
     title: Committing Chart Changes...
     type: git-commit
     arguments:
-      repo: ${{CF_REPO_OWNER}}/${{TARGET_REPO}}
+      repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
       git: github
       working_directory: '/codefresh/volume/${{CF_REPO_NAME}}'
       commit_message: Committed Promotion Candidate ${{RELEASE_CANDIDATE_IMAGE_TAG}} to ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/values.yaml
