@@ -47,7 +47,7 @@ steps:
         - KUBE_CONTEXT=kubecon-dev
         - RELEASE_NAME=eva-dev
         - NAMESPACE=eva-dev
-        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/test:${{RELEASE_CANDIDATE_IMAGE_TAG}}
+        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:${{RELEASE_CANDIDATE_IMAGE_TAG}}
     stage: "Deploy To Development"
     
   DeployToQA:
@@ -82,7 +82,7 @@ steps:
         - KUBE_CONTEXT=kubecon-dev
         - RELEASE_NAME=eva-qa
         - NAMESPACE=eva-qa
-        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/test:${{RELEASE_CANDIDATE_IMAGE_TAG}}
+        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:${{RELEASE_CANDIDATE_IMAGE_TAG}}
     stage: "Deploy To QA"
   
   ApproveProductionDeployment:
@@ -122,5 +122,5 @@ steps:
         - KUBE_CONTEXT=kubecon-dev
         - RELEASE_NAME=eva-prod
         - NAMESPACE=eva-prod
-        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/test:${{RELEASE_CANDIDATE_IMAGE_TAG}}
+        - TEST_IMAGE=aperturesci.jfrog.io/demo-docker/tests:${{RELEASE_CANDIDATE_IMAGE_TAG}}
     stage: "Deploy To Production"
