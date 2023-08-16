@@ -103,7 +103,8 @@ steps:
       git_user_name: aperture-sci
       git_user_email: aperture@codefresh.io
       add:
-        - ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/values.yaml
+        - ${{HELM_CHART_PATH}}/Chart.yaml
+        - ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
     stage: 'Promote Release Candidate'
 
   DeployReleaseCandidate:
