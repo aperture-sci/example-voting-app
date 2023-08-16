@@ -99,10 +99,11 @@ steps:
       repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
       git: github
       working_directory: '/codefresh/volume/${{CF_REPO_NAME}}'
-      commit_message: Committed Promotion Candidate ${{RELEASE_CANDIDATE_IMAGE_TAG}} to ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/values.yaml
-      git_user_name: aperture-sci
+      commit_message: Committed Promotion Candidate ${{RELEASE_CANDIDATE_IMAGE_TAG}} to ${{HELM_CHART_PATH}}
+      git_user_name: aperture-frresh
       git_user_email: aperture@codefresh.io
       base_branch: main
+      rebase: true
       add:
         - ${{HELM_CHART_PATH}}/Chart.yaml
         - ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
