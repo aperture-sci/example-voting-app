@@ -21,7 +21,7 @@ steps:
     arguments:
       action: install
       chart_name: ${{CHART_NAME}}
-      chart_version : ${{RELEASE_CANDIDATE}}
+      chart_version: ${{RELEASE_CANDIDATE}}
       release_name: eva-dev
       helm_version: 3.9.0
       kube_context: kubecon-dev
@@ -56,7 +56,7 @@ steps:
     arguments:
       action: install
       chart_name: ${{CHART_NAME}}
-      chart_version : ${{RELEASE_CANDIDATE}}
+      chart_version: ${{RELEASE_CANDIDATE}}
       release_name: eva-qa
       helm_version: 3.9.0
       kube_context: kubecon-dev
@@ -96,7 +96,7 @@ steps:
     arguments:
       action: install
       chart_name: ${{CHART_NAME}}
-      chart_version : ${{RELEASE_CANDIDATE}}
+      chart_version: ${{RELEASE_CANDIDATE}}
       release_name: eva-prod
       helm_version: 3.9.0
       kube_context: kubecon-dev
