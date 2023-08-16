@@ -123,7 +123,7 @@ steps:
     type: helm
     arguments:
       action: install
-      chart_name: ${{CHART_NAME}}
+      chart_name: demo-helm/${{CHART_NAME}}
       chart_version : ${{PR_CHART_VERSION}}
       release_name: pr-${{CF_PULL_REQUEST_NUMBER}}
       helm_version: 3.9.0
