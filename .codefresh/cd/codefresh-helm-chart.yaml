@@ -15,7 +15,7 @@ steps:
     title: Cloning main repository...
     type: git-clone
     repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
-    revision: ${{CF_REVISION}}
+    revision: main
     git: github
     stage: 'Clone Chart Repo'
 
@@ -102,8 +102,6 @@ steps:
       commit_message: Committed Promotion Candidate ${{RELEASE_CANDIDATE_IMAGE_TAG}} to ${{HELM_CHART_PATH}}
       git_user_name: aperture-frresh
       git_user_email: aperture@codefresh.io
-      base_branch: main
-      rebase: true
       add:
         - ${{HELM_CHART_PATH}}/Chart.yaml
         - ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
