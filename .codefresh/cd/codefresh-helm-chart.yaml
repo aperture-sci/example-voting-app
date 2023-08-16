@@ -48,12 +48,12 @@ steps:
     image: mikefarah/yq:4.35.1
     working_directory: ${{GITClone}}
     commands:
-      - yq e -i '.version=env(NEW_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
+      - yq e -i '.version=strenv(NEW_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/Chart.yaml
       - yq e -i '.image.tag=env(RELEASE_CANDIDATE_IMAGE_TAG)' ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/values.yaml
       - cat ${{HELM_CHART_PATH}}/local-charts/${{RELEASE_CANDIDATE_SERVICE}}/values.yaml
-      - yq e -i '(.dependencies[] | select(has("name")) | select(.name == env(RELEASE_CANDIDATE_SERVICE))).version=env(NEW_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml 
-      - yq e -i '.version=env(NEW_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml
+      - yq e -i '(.dependencies[] | select(has("name")) | select(.name == env(RELEASE_CANDIDATE_SERVICE))).version=strenv(NEW_MICROSERVICE_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml 
+      - yq e -i '.version=strenv(NEW_CHART_VERSION)' ${{HELM_CHART_PATH}}/Chart.yaml
       - cat ${{HELM_CHART_PATH}}/Chart.yaml
     stage: 'Bump Chart Version'
 
