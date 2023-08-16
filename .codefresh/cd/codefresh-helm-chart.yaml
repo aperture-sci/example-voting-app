@@ -116,6 +116,7 @@ steps:
       TRIGGER_ID: eva
       BRANCH: main
       ENABLE_NOTIFICATIONS: true
+      DETACH: true
       CONTEXT:
         - github
       VARIABLE:
