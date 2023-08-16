@@ -123,13 +123,11 @@ steps:
     type: helm
     arguments:
       action: install
-      chart_name: ${{CHART_NAME}}
-      chart_version: ${{PR_CHART_VERSION}}
+      chart_name: /codefresh/volume/${{CF_REPO_NAME}}/${{CHART_NAME}}
       release_name: pr-${{CF_PULL_REQUEST_NUMBER}}
       helm_version: 3.9.0
       kube_context: kubecon-dev
       namespace: eva-prs
-      helm_repository_context: aperture-sci-artifactory
       skip_cf_stable_helm_repo: true
       credentials_in_arguments: true
       custom_value_files:
