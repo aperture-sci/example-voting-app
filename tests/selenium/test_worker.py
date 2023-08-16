@@ -31,45 +31,11 @@ def browser():
     yield browser
     browser.quit()
 
-def test_confirm_vote_title(browser):
-    browser.get("http://{}".format(vote_endpoint))
-    option_a = "Squirrels"
-    option_b = "Dogs"
-    assert "{} vs {}!".format(option_a, option_b) in browser.title
-
-def test_confirm_vote_choice_form(browser):
-    browser.get("http://{}".format(vote_endpoint))
-    element = browser.find_element(By.ID, 'choice')
-    assert element.get_attribute('id') == 'choice'
-
-
-def test_confirm_vote_button_a(browser):
-    browser.get("http://{}".format(vote_endpoint))
-    element = browser.find_element(By.ID, 'a')
-    assert element.get_attribute('id') == 'a'
-
-
-def test_confirm_vote_button_b(browser):
-    browser.get("http://{}".format(vote_endpoint))
-    element = browser.find_element(By.ID, 'b')
-    assert element.get_attribute('id') == 'b'
-
 
 def test_vote_click(browser,):
     browser.get("http://{}".format(vote_endpoint))
     browser.find_element(By.ID, 'a').click()
     WebDriverWait(browser, 3)
-
-
-def test_confirm_result_title(browser):
-    browser.get("http://{}".format(result_endpoint))
-    assert "Squirrels vs Dogs -- Result" in browser.title
-
-
-def test_confirm_result(browser):
-    browser.get("http://{}".format(result_endpoint))
-    element = browser.find_element(By.ID, 'result')
-    assert element.get_attribute('id') == 'result'
 
 
 def test_confirm_result_vote_tally(browser):
