@@ -19,7 +19,7 @@ steps:
 
   TestNPMAngular:
     Title: Running Unit Tests...
-    image: trion/ng-cli
+    image: trion/ng-cli-karma
     working_directory: ${{GITClone}}/mock-tests
       - npm i
       - ng test
