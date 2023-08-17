@@ -34,6 +34,8 @@ steps:
     environment:
       - BUCKET_NAME=aperture-sci
       - CF_STORAGE_INTEGRATION=google
+      - ALLURE_DIR.0=allure-results
+      - REPORT_TYPE.0=allure
     stage: 'Run Unit Tests'
 
   BuildDockerfiles:
@@ -211,4 +213,6 @@ steps:
     environment:
       - BUCKET_NAME=aperture-sci
       - CF_STORAGE_INTEGRATION=google
+      - ALLURE_DIR.1=allure-results
+      - REPORT_TYPE.1=allure
     stage: 'Run Integration Tests'
