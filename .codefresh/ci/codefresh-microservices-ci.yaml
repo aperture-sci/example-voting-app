@@ -204,7 +204,7 @@ steps:
       - BUCKET_NAME=aperture-sci
       - CF_STORAGE_INTEGRATION=google
       - ALLURE_DIR.0=${{CF_REPO_NAME}}/allure-results
-      - REPORT_TYPE.0=allure
+      - REPORT_TYPE.0=mocha
       - ALLURE_DIR.1=allure-results
       - REPORT_TYPE.1=allure
     stage: 'Upload Test Reports'
