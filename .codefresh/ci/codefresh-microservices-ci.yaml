@@ -2,8 +2,10 @@ version: '1.0'
 
 stages:
   - 'Clone Source Code Repo'
+  - 'Run Unit Tests'
   - 'Build Docker Images'
   - 'Run Integration Tests'
+  - 'Upload Test Reports'
 
 steps:
 
@@ -16,9 +18,15 @@ steps:
       git: github
     stage: 'Clone Source Code Repo'
 
-  # TODO: Add NPM Build for Result Microservice
-
-  # TODO: Add Mocha Testsfor Result Microservice
+  TestNPMAngular:
+    Title: Running Unit Tests...
+    image: trion/ng-cli-karma
+    #working_directory: ${{GITClone}}/mock-tests
+    commands:
+      - cd /codefresh/volume/example-voting-app/mock-tests
+      - npm i
+      - ng test
+    stage: 'Run Unit Tests'
 
   BuildDockerfiles:
     title: Building Required Docker Images
@@ -189,10 +197,14 @@ steps:
     stage: 'Run Integration Tests'
 
   UploadTestReports:
-    title: Uploading Test Reports
+    title: Uploading Test Reports...
     image: codefresh/cf-docker-test-reporting
-    working_directory: '${{CF_VOLUME_PATH}}/'
+    working_directory: '${{CF_VOLUME_PATH}}'
     environment:
       - BUCKET_NAME=aperture-sci
       - CF_STORAGE_INTEGRATION=google
-    stage: 'Run Integration Tests'
+      - ALLURE_DIR.0=${{CF_REPO_NAME}}/allure-results
+      - REPORT_TYPE.0=mocha
+      - ALLURE_DIR.1=allure-results
+      - REPORT_TYPE.1=allure
+    stage: 'Upload Test Reports'
