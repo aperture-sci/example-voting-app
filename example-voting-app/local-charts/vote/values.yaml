@@ -4,7 +4,7 @@
 # name: value
 image:
   repository: aperturesci.jfrog.io/demo-docker/vote
-  tag: pr-4-change-vote-a-5-c873f29
+  tag: pr-7-update-vote-app-da61645
 redis:
   usePassword: false
 replicaCount: 1
