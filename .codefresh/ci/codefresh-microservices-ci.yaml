@@ -21,7 +21,8 @@ steps:
     Title: Running Unit Tests...
     image: trion/ng-cli-karma
     #working_directory: ${{GITClone}}/mock-tests
-      - /codefresh/volume/example-voting-app/mock-tests
+    commands:
+      - cd /codefresh/volume/example-voting-app/mock-tests
       - npm i
       - ng test --watch false
     stage: 'Run Unit Tests'
