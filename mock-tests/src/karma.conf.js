@@ -18,10 +18,10 @@ module.exports = function (config) {
       colors: true,
       logLevel: config.LOG_INFO,
       autoWatch: true,
-      browsers: ['ChromeHeadless'],
+      browsers: ['/usr/bin/xvfb-chromium-webgl'],
       singleRun: false,
       allureReport: {
-        reportDir: 'allure-results',
+        reportDir: '../../allure-results',
         useBrowserName: true
       }
     });

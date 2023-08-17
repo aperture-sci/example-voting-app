@@ -2,6 +2,7 @@ version: '1.0'
 
 stages:
   - 'Clone Source Code Repo'
+  - 'Run Unit Tests'
   - 'Build Docker Images'
   - 'Run Integration Tests'
 
@@ -16,9 +17,22 @@ steps:
       git: github
     stage: 'Clone Source Code Repo'
 
-  # TODO: Add NPM Build for Result Microservice
-
-  # TODO: Add Mocha Testsfor Result Microservice
+  TestNPMAngular:
+    Title: Running Unit Tests...
+    image: trion/ng-cli
+    working_directory: ${{GITClone}}/mock-tests
+      - npm i
+      - ng test
+    stage: 'Run Unit Tests'
+  
+  UploadUnitTestReports:
+    title: Uploading Test Reports
+    image: codefresh/cf-docker-test-reporting
+    working_directory: '${{CF_VOLUME_PATH}}/'
+    environment:
+      - BUCKET_NAME=aperture-sci
+      - CF_STORAGE_INTEGRATION=google
+    stage: 'Run Unit Tests'
 
   BuildDockerfiles:
     title: Building Required Docker Images
@@ -188,7 +202,7 @@ steps:
           - vote 
     stage: 'Run Integration Tests'
 
-  UploadTestReports:
+  UploadIntegrationTestReports:
     title: Uploading Test Reports
     image: codefresh/cf-docker-test-reporting
     working_directory: '${{CF_VOLUME_PATH}}/'
