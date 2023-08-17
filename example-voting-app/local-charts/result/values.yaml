@@ -4,7 +4,7 @@
 # name: value
 image:
   repository: aperturesci.jfrog.io/demo-docker/result
-  tag: pr-6-change-vote-b-6b0d75d
+  tag: pr-8-update-result-app-6b9cee3
 postgresql:
   postgresUser: postgres
   postgresPassword: postgres
