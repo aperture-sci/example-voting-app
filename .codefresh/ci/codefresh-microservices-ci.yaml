@@ -24,7 +24,7 @@ steps:
     commands:
       - cd /codefresh/volume/example-voting-app/mock-tests
       - npm i
-      - ng test --watch false --progress false
+      - ng test
     stage: 'Run Unit Tests'
   
   UploadUnitTestReports:
