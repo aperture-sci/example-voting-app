@@ -5,6 +5,7 @@ stages:
   - 'Run Unit Tests'
   - 'Build Docker Images'
   - 'Run Integration Tests'
+  - 'Upload Test Reports'
 
 steps:
 
@@ -25,17 +26,6 @@ steps:
       - cd /codefresh/volume/example-voting-app/mock-tests
       - npm i
       - ng test
-    stage: 'Run Unit Tests'
-  
-  UploadUnitTestReports:
-    title: Uploading Test Reports
-    image: codefresh/cf-docker-test-reporting
-    working_directory: '${{CF_VOLUME_PATH}}/${{CF_REPO_NAME}}'
-    environment:
-      - BUCKET_NAME=aperture-sci
-      - CF_STORAGE_INTEGRATION=google
-      - ALLURE_DIR.0=allure-results
-      - REPORT_TYPE.0=allure
     stage: 'Run Unit Tests'
 
   BuildDockerfiles:
@@ -206,13 +196,15 @@ steps:
           - vote 
     stage: 'Run Integration Tests'
 
-  UploadIntegrationTestReports:
-    title: Uploading Test Reports
+  UploadTestReports:
+    title: Uploading Test Reports...
     image: codefresh/cf-docker-test-reporting
-    working_directory: '${{CF_VOLUME_PATH}}/'
+    working_directory: '${{CF_VOLUME_PATH}}'
     environment:
       - BUCKET_NAME=aperture-sci
       - CF_STORAGE_INTEGRATION=google
+      - ALLURE_DIR.0=${{CF_REPO_NAME}}/allure-results
+      - REPORT_TYPE.0=allure
       - ALLURE_DIR.1=allure-results
       - REPORT_TYPE.1=allure
-    stage: 'Run Integration Tests'
+    stage: 'Upload Test Reports'
