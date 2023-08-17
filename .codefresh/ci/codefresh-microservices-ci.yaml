@@ -20,9 +20,10 @@ steps:
   TestNPMAngular:
     Title: Running Unit Tests...
     image: trion/ng-cli-karma
-    working_directory: ${{GITClone}}/mock-tests
+    #working_directory: ${{GITClone}}/mock-tests
+      - cd ${{GITClone}}/mock-tests
       - npm i
-      - ng test
+      - ng test --watch false
     stage: 'Run Unit Tests'
   
   UploadUnitTestReports:
