@@ -2,10 +2,10 @@ FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
 
 WORKDIR /source
 COPY *.csproj .
-RUN dotnet restore -a x64
+RUN dotnet restore
 
 COPY . .
-RUN dotnet publish -a x64 -c release -o /app --self-contained false --no-restore
+RUN dotnet publish -c release -o /app --self-contained false --no-restore
 
 # app image
 FROM mcr.microsoft.com/dotnet/runtime:7.0
