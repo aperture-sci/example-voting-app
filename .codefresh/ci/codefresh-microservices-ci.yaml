@@ -4,6 +4,7 @@ stages:
   - 'Clone Source Code Repo'
   - 'Run Unit Tests'
   - 'Build Docker Images'
+  - 'Report Docker Images'
   - 'Run Integration Tests'
   - 'Upload Test Reports'
 
@@ -21,7 +22,6 @@ steps:
   TestNPMAngular:
     Title: Running Unit Tests...
     image: trion/ng-cli-karma
-    #working_directory: ${{GITClone}}/mock-tests
     commands:
       - cd /codefresh/volume/example-voting-app/mock-tests
       - npm i
@@ -47,6 +47,17 @@ steps:
         tag: ${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
         registry: aperture-sci
     stage: 'Build Docker Images'
+
+  ReportImageMetadataAll:
+    title: Reporting ${{MICROSERVICE}} image to Codefresh
+    type: image-enricher
+    stage: test
+    arguments:
+      IMAGE: aperturesci.jfrog.io/demo-docker/${{MICROSERVICE}}:${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+      BRANCH: ${{CF_BRANCH}}
+      REPO: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+      GIT_PROVIDER_NAME: github-app
+    stage: 'Report Docker Images'
 
   SetMicroserviceImage:
     title: Setting Image to Test
