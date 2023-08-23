@@ -17,6 +17,7 @@ namespace Worker
             try
             {
                 // Set redisHost
+                public string redisHost;
                 redisHost = Environment.GetEnvironmentVariable("REDIS_HOST");
                 // If necessary, create it.
                 if (value == null)
@@ -25,26 +26,29 @@ namespace Worker
                 }
 
                 // Set postgresServer
+                public string postgresServer;
                 postgresServer = Environment.GetEnvironmentVariable("POSTGRES_SERVER");
                 // If necessary, create it.
-                if (value == null)
+                if (postgresServer == null)
                 {
                     Environment.SetEnvironmentVariable("postgresServer", "db");
                 }
 
-                // Set postgresUsername
+                // Set postgresUsername'
+                public string postgresUsername;
                 postgresUsername = Environment.GetEnvironmentVariable("POSTGRES_USERNAME");
                 // If necessary, create it.
-                if (value == null)
+                if (postgresUsername == null)
                 {
                     Environment.SetEnvironmentVariable("postgresUsername", "postgres");
                 }
 
 
                 // Set postgresPassword
+                public string postgresPassword;
                 postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
                 // If necessary, create it.
-                if (value == null)
+                if (postgresPassword == null)
                 {
                     Environment.SetEnvironmentVariable("postgresPassword", "postgres");
                 }
