@@ -18,7 +18,7 @@ namespace Worker
             public string redisHost;
             redisHost = Environment.GetEnvironmentVariable("REDIS_HOST");
             // If necessary, create it.
-            if (value == null)
+            if (redisHost == null)
             {
                 Environment.SetEnvironmentVariable("redisHost", "redis");
             }
