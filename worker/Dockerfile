@@ -1,12 +1,11 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
-ARG TARGETARCH
+FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
 
 WORKDIR /source
 COPY *.csproj .
-RUN dotnet restore -a $TARGETARCH
+RUN dotnet restore -a linux/amd64
 
 COPY . .
-RUN dotnet publish -a $TARGETARCH -c release -o /app --self-contained false --no-restore
+RUN dotnet publish -a linux/amd64 -c release -o /app --self-contained false --no-restore
 
 # app image
 FROM mcr.microsoft.com/dotnet/runtime:7.0
