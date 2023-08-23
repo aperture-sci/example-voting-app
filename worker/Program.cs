@@ -14,10 +14,44 @@ namespace Worker
     {
         public static int Main(string[] args)
         {
+            // Connect to services
             try
             {
-                var pgsql = OpenDbConnection("Server=db;Username=postgres;Password=postgres;");
-                var redisConn = OpenRedisConnection("redis");
+
+                // Set redisHost
+                var redisHost = Environment.GetEnvironmentVariable("REDIS_HOST");
+                // If necessary, create it.
+                if (redisHost == null)
+                {
+                    Environment.SetEnvironmentVariable("redisHost", "redis");
+                }
+
+                // Set postgresServer
+                var postgresServer = Environment.GetEnvironmentVariable("POSTGRES_SERVER");
+                // If necessary, create it.
+                if (postgresServer == null)
+                {
+                    Environment.SetEnvironmentVariable("postgresServer", "db");
+                }
+
+                // Set postgresUsername'
+                var postgresUsername = Environment.GetEnvironmentVariable("POSTGRES_USERNAME");
+                // If necessary, create it.
+                if (postgresUsername == null)
+                {
+                    Environment.SetEnvironmentVariable("postgresUsername", "postgres");
+                }
+
+                // Set postgresPassword
+                var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+                // If necessary, create it.
+                if (postgresPassword == null)
+                {
+                    Environment.SetEnvironmentVariable("postgresPassword", "postgres");
+                }
+
+                var pgsql = OpenDbConnection($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword};");
+                var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();
 
                 // Keep alive is not implemented in Npgsql yet. This workaround was recommended:
