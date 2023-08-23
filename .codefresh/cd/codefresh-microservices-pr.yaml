@@ -2,6 +2,7 @@ version: '1.0'
 stages:
   - 'Clone Source Code Repo'
   - 'Build Docker Images'
+  - 'Report Docker Images'
   - 'Bump Chart Version'
   - 'Update Chart Dependencies'
   - 'Lint Chart'
@@ -41,6 +42,16 @@ steps:
         tag: pr-${{CF_PULL_REQUEST_NUMBER}}-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
         registry: aperture-sci
     stage: 'Build Docker Images'
+
+  ReportImageMetadataAll:
+    title: Reporting ${{MICROSERVICE}} image to Codefresh
+    type: image-enricher
+    arguments:
+      IMAGE: aperturesci.jfrog.io/demo-docker/${{MICROSERVICE}}:${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+      BRANCH: ${{CF_BRANCH}}
+      REPO: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+      GIT_PROVIDER_NAME: github-app
+    stage: 'Report Docker Images'
 
   HelmChartBumpVersions:
     title: Bumping Helm Chart Versions...
