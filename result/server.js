@@ -28,7 +28,7 @@ var postgresUsername = process.env.POSTGRES_USERNAME || 'postgres'
 var postgresPassword = process.env.POSTGRES_PASSWORD || 'postgres'
 
 var pool = new pg.Pool({
-  connectionString: 'postgres://postgres:postgres@db/postgres'
+  connectionString: `postgres://${postgresUsername}:${postgresPassword}@${postgresServer}/postgres`
 });
 
 async.retry(
