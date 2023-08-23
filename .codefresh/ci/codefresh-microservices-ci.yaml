@@ -51,7 +51,6 @@ steps:
   ReportImageMetadataAll:
     title: Reporting ${{MICROSERVICE}} image to Codefresh
     type: image-enricher
-    stage: test
     arguments:
       IMAGE: aperturesci.jfrog.io/demo-docker/${{MICROSERVICE}}:${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
       BRANCH: ${{CF_BRANCH}}
