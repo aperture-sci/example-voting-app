@@ -38,6 +38,7 @@ steps:
         working_directory: ${{GITClone}}/${{MICROSERVICE}}/
         image_name: ${{MICROSERVICE}}
         tag: ${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+        platform: linux/amd64
         registry: aperture-sci
       DockerBuildTests:
         title: Building Tests Docker Image
@@ -45,6 +46,7 @@ steps:
         working_directory: ${{GITClone}}/tests/
         image_name: tests
         tag: ${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+        platform: linux/amd64
         registry: aperture-sci
     stage: 'Build Docker Images'
 
