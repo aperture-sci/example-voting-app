@@ -4,5 +4,5 @@
 # name: value
 image:
   repository: aperturesci.jfrog.io/demo-docker/result
-  tag: pr-8-update-result-app-6b9cee3
+  tag: pr-16-update-result-10-a10c3fe
 replicaCount: 1
