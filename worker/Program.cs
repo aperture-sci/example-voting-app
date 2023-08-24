@@ -66,6 +66,7 @@ namespace Worker
                     postgresPassword = postgresPasswordEnv;
                 }
 
+                // Create DB connections
                 Console.WriteLine($"PSQL Server: {postgresServer}\n");
                 Console.WriteLine($"PSQL Username: {postgresUsername}\n");
                 Console.WriteLine($"PSQL Password: {postgresPassword}\n");
