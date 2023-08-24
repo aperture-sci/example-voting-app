@@ -4,7 +4,7 @@
 # name: value
 image:
   repository: aperturesci.jfrog.io/demo-docker/worker
-  tag: pr-12-correct-services-4ab1833
+  tag: pr-17-modify-worker-0a0a983
 redis:
   usePassword: false
 replicaCount: 1
