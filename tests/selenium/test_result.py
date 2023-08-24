@@ -16,9 +16,6 @@ from selenium.common.exceptions import (
 vote_endpoint = os.getenv('VOTE_ENDPOINT')
 result_endpoint = os.getenv('RESULT_ENDPOINT')
 
-# Give Selenium Hub time to start
-time.sleep(15)  # TODO: figure how to do this better
-
 @pytest.fixture(scope='module')
 
 def browser():   
@@ -34,7 +31,7 @@ def browser():
 
 def test_confirm_result_title(browser):
     browser.get("http://{}".format(result_endpoint))
-    assert "Cats vs Dogs -- Result" in browser.title
+    assert "Cats vs Birds -- Result" in browser.title
 
 
 def test_confirm_result(browser):
