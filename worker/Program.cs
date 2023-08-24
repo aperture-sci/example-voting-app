@@ -14,43 +14,65 @@ namespace Worker
     {
         public static int Main(string[] args)
         {
+
             // Connect to services
             try
             {
-
                 // Set redisHost
-                var redisHost = Environment.GetEnvironmentVariable("REDIS_HOST");
-                // If necessary, create it.
-                if (redisHost == null)
+                var redisHostEnv = Environment.GetEnvironmentVariable("REDIS_HOST");
+                string redisHost;
+                if (redisHostEnv == null)
                 {
-                    Environment.SetEnvironmentVariable("redisHost", "redis");
+                    redisHost = "redis";
+                }
+                else
+                {
+                    redisHost = redisHostEnv;
                 }
 
                 // Set postgresServer
-                var postgresServer = Environment.GetEnvironmentVariable("POSTGRES_SERVER");
-                // If necessary, create it.
-                if (postgresServer == null)
+                var postgresServerEnv = Environment.GetEnvironmentVariable("POSTGRES_SERVER");
+                string postgresServer;
+                if (postgresServerEnv == null)
                 {
-                    Environment.SetEnvironmentVariable("postgresServer", "db");
+                    postgresServer = "db";
+                }
+                else
+                {
+                    postgresServer = postgresServerEnv;
                 }
 
-                // Set postgresUsername'
-                var postgresUsername = Environment.GetEnvironmentVariable("POSTGRES_USERNAME");
-                // If necessary, create it.
-                if (postgresUsername == null)
+                // Set postgresUsername
+                var postgresUsernameEnv = Environment.GetEnvironmentVariable("POSTGRES_USERNAME");
+                string postgresUsername;
+                if (postgresUsernameEnv == null)
                 {
-                    Environment.SetEnvironmentVariable("postgresUsername", "postgres");
+                    postgresUsername = "postgres";
+                }
+                else
+                {
+                    postgresUsername = postgresUsernameEnv;
                 }
 
                 // Set postgresPassword
-                var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-                // If necessary, create it.
-                if (postgresPassword == null)
+                var postgresPasswordEnv = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+                string postgresPassword;
+                if (postgresPasswordEnv == null)
                 {
-                    Environment.SetEnvironmentVariable("postgresPassword", "postgres");
+                    postgresPassword = "postgres";
+                }
+                else
+                {
+                    postgresPassword = postgresPasswordEnv;
                 }
 
+                Console.WriteLine($"PSQL Server: {postgresServer}\n");
+                Console.WriteLine($"PSQL Username: {postgresUsername}\n");
+                Console.WriteLine($"PSQL Password: {postgresPassword}\n");
+                Console.WriteLine($"Connection String:\n");
+                Console.WriteLine($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword}/n");
                 var pgsql = OpenDbConnection($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword};");
+                Console.WriteLine($"Redis Host: {redisHost}\n");
                 var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();
 
