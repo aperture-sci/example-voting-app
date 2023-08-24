@@ -23,7 +23,7 @@ namespace Worker
                 // If necessary, create it.
                 if (redisHost == null)
                 {
-                    Environment.SetEnvironmentVariable("redisHost", "redis");
+                    var redisHost = "redis";
                 }
 
                 // Set postgresServer
@@ -31,7 +31,7 @@ namespace Worker
                 // If necessary, create it.
                 if (postgresServer == null)
                 {
-                    Environment.SetEnvironmentVariable("postgresServer", "db");
+                    var postgresServer = "db";
                 }
 
                 // Set postgresUsername'
@@ -39,7 +39,7 @@ namespace Worker
                 // If necessary, create it.
                 if (postgresUsername == null)
                 {
-                    Environment.SetEnvironmentVariable("postgresUsername", "postgres");
+                    var postgresUsername = "postgres";
                 }
 
                 // Set postgresPassword
@@ -47,7 +47,7 @@ namespace Worker
                 // If necessary, create it.
                 if (postgresPassword == null)
                 {
-                    Environment.SetEnvironmentVariable("postgresPassword", "postgres");
+                    var postgresPassword = "postgres";
                 }
 
                 var pgsql = OpenDbConnection($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword};");
