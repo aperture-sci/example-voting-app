@@ -4,7 +4,7 @@
 # name: value
 image:
   repository: aperturesci.jfrog.io/demo-docker/vote
-  tag: pr-18-update-vote-dogs-vs-cats-5677c0f
+  tag: pr-20-change-vote-app-b-to-birds-1797dcf
 redis:
   usePassword: false
 replicaCount: 1
