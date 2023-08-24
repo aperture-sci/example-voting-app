@@ -5,8 +5,6 @@
 image:
   repository: aperturesci.jfrog.io/demo-docker/worker
   tag: pr-12-correct-services-4ab1833
-postgresql:
-  postgresUser: postgres
 redis:
   usePassword: false
 replicaCount: 1

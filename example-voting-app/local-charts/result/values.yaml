@@ -5,7 +5,4 @@
 image:
   repository: aperturesci.jfrog.io/demo-docker/result
   tag: pr-8-update-result-app-6b9cee3
-postgresql:
-  postgresUser: postgres
-  postgresPassword: postgres
 replicaCount: 1
