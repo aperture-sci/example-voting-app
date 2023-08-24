@@ -19,47 +19,51 @@ namespace Worker
             try
             {
                 // Set redisHost
+                var redisHostEnv = Environment.GetEnvironmentVariable("REDIS_HOST");
                 string redisHost;
-                if (Environment.GetEnvironmentVariable("REDIS_HOST") == null)
-                {
-                    redisHost = Environment.GetEnvironmentVariable("REDIS_HOST");
-                }
-                else
+                if (redisHostEnv == null)
                 {
                     redisHost = "redis";
                 }
+                else
+                {
+                    redisHost = redisHostEnv;
+                }
 
                 // Set postgresServer
+                var postgresServerEnv = Environment.GetEnvironmentVariable("POSTGRES_SERVER");
                 string postgresServer;
-                if (Environment.GetEnvironmentVariable("POSTGRES_SERVER") == null)
-                {
-                    postgresServer = Environment.GetEnvironmentVariable("POSTGRES_SERVER");
-                }
-                else
+                if (postgresServerEnv == null)
                 {
                     postgresServer = "db";
                 }
+                else
+                {
+                    postgresServer = postgresServerEnv;
+                }
 
                 // Set postgresUsername
+                var postgresUsernameEnv = Environment.GetEnvironmentVariable("POSTGRES_USERNAME");
                 string postgresUsername;
-                if (Environment.GetEnvironmentVariable("POSTGRES_USERNAME") == null)
-                {
-                    postgresUsername = Environment.GetEnvironmentVariable("POSTGRES_USERNAME");
-                }
-                else
+                if (postgresUsernameEnv == null)
                 {
                     postgresUsername = "postgres";
                 }
+                else
+                {
+                    postgresUsername = postgresUsernameEnv;
+                }
 
                 // Set postgresPassword
+                var postgresPasswordEnv = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
                 string postgresPassword;
-                if (Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") == null)
+                if (postgresPasswordEnv == null)
                 {
-                    postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+                    postgresPassword = "postgres";
                 }
                 else
                 {
-                    postgresPassword = "postgres";
+                    postgresPassword = postgresPasswordEnv;
                 }
 
                 Console.WriteLine($"PSQL Server: {postgresServer}\n");
