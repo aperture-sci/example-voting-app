@@ -71,9 +71,9 @@ namespace Worker
                 Console.WriteLine($"PSQL Username: {postgresUsername}\n");
                 Console.WriteLine($"PSQL Password: {postgresPassword}\n");
                 Console.WriteLine($"Connection String:\n");
-                Console.WriteLine($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword}/n");
-                var pgsql = OpenDbConnection($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword};");
+                Console.WriteLine($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword}\n");
                 Console.WriteLine($"Redis Host: {redisHost}\n");
+                var pgsql = OpenDbConnection($"Server={postgresServer};Username={postgresUsername};Password={postgresPassword};");
                 var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();
 
